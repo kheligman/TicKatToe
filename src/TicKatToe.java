@@ -11,13 +11,13 @@ import javax.swing.JPanel;
 
 public class TicKatToe extends JPanel{
 
-	public static boolean player1 = true;
-	public static JLabel player;
-	private static int movesPlayed = 0;
-	private static ArrayList<Square> squares = new ArrayList<Square>();
-	private static int justPlayed = -1;
-	private static ArrayList<Integer> xMoves = new ArrayList<Integer>();
-	private static ArrayList<Integer> yMoves = new ArrayList<Integer>();
+	public boolean player1 = true;
+	public JLabel player;
+	private int movesPlayed = 0;
+	private ArrayList<Square> squares = new ArrayList<Square>();
+	private int justPlayed = -1;
+	private ArrayList<Integer> xMoves = new ArrayList<Integer>();
+	private  ArrayList<Integer> yMoves = new ArrayList<Integer>();
 
 	public TicKatToe()
 	{
@@ -44,7 +44,7 @@ public class TicKatToe extends JPanel{
 
 	}
 
-	public static void nextMove()
+	public void nextMove()
 	{
 		movesPlayed++;
 		if(noWin())
@@ -68,12 +68,24 @@ public class TicKatToe extends JPanel{
 
 	}
 
-	private static void winner() {
-		System.out.println("winner!");
-
+	private void winner() 
+	{
+		this.invalidate();
+		this.removeAll();
+		JLabel winner;
+		if(player1)
+		{
+			winner = new JLabel("Player 1 Wins!");
+		}
+		else
+		{
+			winner = new JLabel("Player 2 Wins!");
+		}
+		add(winner);
+		
 	}
 
-	public static void setJustPlayed(int x)
+	public void setJustPlayed(int x)
 	{
 		justPlayed = x;
 		if(player1)
@@ -86,16 +98,20 @@ public class TicKatToe extends JPanel{
 		}
 	}
 
-	public static boolean noWin()
+	public boolean noWin()
 	{
-		if(movesPlayed < 6)
+		if(movesPlayed < 7)
 		{
 			return true;
 		}
 		if(player1)
 		{
-			return !checkMoves(xMoves, justPlayed);
+			return !checkMoves(xMoves, justPlayed);	
 			
+		}
+		else if(!player1)
+		{
+			return !checkMoves(yMoves, justPlayed);	
 		}
 		return true;
 	}
@@ -157,6 +173,61 @@ public class TicKatToe extends JPanel{
 
 	}
 
+	public boolean getPlayer() {
+		return player1;
+	}
+
+
+public class Square extends JButton{
+	
+	private String played;
+	private int id;
+	
+	public Square(int num)
+	{
+		played = " ";
+		id = num;
+		setLabel(" ");
+		addActionListener(new Clicked());
+		
+	}
+	
+	public int getId()
+	{
+		return id;
+	}
+	
+	public void setLabel(String x)
+	{
+		played = x;
+		this.setText(x);
+	}
+	
+	public String beenPlayed()
+	{
+		//returns x or o, n for not played yet
+		return played;
+	}
+	
+	public class Clicked implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if(player1)
+			{
+				setLabel("x");
+			}
+			
+			else
+			{
+				setLabel("o");
+			}
+			setJustPlayed(id);
+			nextMove();
+		} 
+		
+	}
+}
 
 
 }
