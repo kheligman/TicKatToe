@@ -85,15 +85,15 @@ var AI = function(level) {
             return Game.score(state);
         }
         else {
-            var stateScore; // this stores the minimax value we'll compute
-alert("1");
+            var stateScore; // this stores the minimax value we'll compute\
+			
             if(state.turn === "X")
             // X wants to maximize --> initialize to a value smaller than any possible score
                 stateScore = -1000;
             else
             // O wants to minimize --> initialize to a value larger than any possible score
                 stateScore = 1000;
-alert("2");
+
             var availablePositions = state.emptyCells();
 
             //enumerate next available states using the info form available positions
@@ -104,7 +104,7 @@ alert("2");
 
                 return nextState;
             });
-alert("3");
+
             /* calculate the minimax value for all available next states
              * and evaluate the current state's value */
             availableNextStates.forEach(function(nextState) {
@@ -158,10 +158,10 @@ alert("3");
             var nextState = action.applyTo(game.currentState); //get next state by applying the action
 
             action.minimaxVal = minimaxValue(nextState); //calculate and set the action's minimax value
-alert("4");
+
             return action;
         });
-alert("2");
+
         //sort the enumerated actions list by score
         if(turn === "X")
         //X maximizes --> sort the actions in a descending manner to have the action with maximum minimax at first
@@ -169,7 +169,7 @@ alert("2");
         else
         //O minimizes --> sort the actions in an ascending manner to have the action with minimum minimax at first
             availableActions.sort(AIAction.ASCENDING);
-alert("3");
+
         /*
          * take the optimal action 40% of the time, and take the 1st suboptimal action 60% of the time
          */
@@ -187,7 +187,7 @@ alert("3");
                 chosenAction = availableActions[0];
             }
         }
-		alert("4");
+
         var next = chosenAction.applyTo(game.currentState);
 
         ui.insertAt(chosenAction.movePosition, turn);

@@ -17,7 +17,7 @@ $(".level").each(function() {
         $this.toggleClass('selected');
 
         ai.level = $this.attr("id");
-    });
+    }); 
 });
 
 /*
