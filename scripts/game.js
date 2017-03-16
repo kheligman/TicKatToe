@@ -78,7 +78,7 @@ var State = function(old) {
         }
 
         //check columns
-        for(var i = 0; i <= 2 ; i++) {
+        for(var i = 0; i <= 3 ; i++) {
             if(B[i] !== "E" && B[i] === B[i + 4] && B[i + 4] === B[i + 8] && B[i + 8] === B[i + 12]) {
                 this.result = B[i] + "-won"; //update the state result
                 return true;
@@ -89,12 +89,12 @@ var State = function(old) {
         //check diagonals
         
         if(B[0] !== "E" && B[0] == B[5] && B[5] === B[10] && B[10] === B[15]) {
-            this.result = B[i] + "-won"; //update the state result
+            this.result = B[0] + "-won"; //update the state result
 			return true;
         }
 			
-		if(B[0] !== "E" && B[3] == B[6] && B[6] === B[9] && B[9] === B[12]) {
-            this.result = B[i] + "-won"; //update the state result
+		if(B[3] !== "E" && B[3] == B[6] && B[6] === B[9] && B[9] === B[12]) {
+            this.result = B[3] + "-won"; //update the state result
             return true;
         }
         
