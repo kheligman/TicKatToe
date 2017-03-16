@@ -85,14 +85,19 @@ var State = function(old) {
             }
         }
 
-		//KATHRYN STILL NEED TO UPDATE THIS
+		
         //check diagonals
-       /* for(var i = 0, j = 4; i <= 2 ; i = i + 2, j = j - 2) {
-            if(B[i] !== "E" && B[i] == B[i + j] && B[i + j] === B[i + 2*j]) {
-                this.result = B[i] + "-won"; //update the state result
-                return true;
-            }
-        } */
+        
+        if(B[0] !== "E" && B[0] == B[5] && B[5] === B[10] && B[10] === B[15]) {
+            this.result = B[i] + "-won"; //update the state result
+			return true;
+        }
+			
+		if(B[0] !== "E" && B[3] == B[6] && B[6] === B[9] && B[9] === B[12]) {
+            this.result = B[i] + "-won"; //update the state result
+            return true;
+        }
+        
 
         var available = this.emptyCells();
         if(available.length == 0) {
